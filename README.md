@@ -74,7 +74,7 @@ Pages, в ветку `gh-pages`, каждый раз когда обновляе
 Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
 выпадающем окне перейти по ссылке `Details`.
 
-![Deployment status](./assets/status.png)
+![Deployment status](./assetsnpm test/status.png)
 
 ### Живая страница
 
