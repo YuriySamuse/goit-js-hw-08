@@ -3,31 +3,36 @@ import throttle from 'lodash.throttle';
 
 const playerRef = document.querySelector('#vimeo-player');
 const player = new Player(playerRef);
-
 const LOCAL_STORAGE_KEY = 'videoplayer-current-time';
 
-function playTime(evt) {
-  localStorage.save(LOCAL_STORAGE_KEY, Math.floor(evt.seconds));
-  console.log(Math.floor(evt.seconds));
+function playTime({ seconds }) {
+  localStorage.setItem(LOCAL_STORAGE_KEY, seconds);
+  // console.log(seconds);
 }
 
 player.on('timeupdate', throttle(playTime, 1000));
 
-// const savingTime = JSON.parse(
-//   localStorage.save(LOCAL_STORAGE_KEY, Math.floor(evt.seconds))
-// );
+const initPage = () => {
+  let saveTime = localStorage.getItem(LOCAL_STORAGE_KEY);
+  if (saveTime) {
+    player.setCurrentTime(saveTime);
+  }
+};
+initPage();
 
-// if (savingTime) {
-//   player
-//     .setCurrentTime(savingTime.seconds)
-//     .then(function (seconds) {})
-//     .catch(function (error) {
-//       switch (error.name) {
-//         case 'RangeError':
-//           break;
+// player
+//   .setCurrentTime(30.456)
+//   .then(function (seconds) {
+//     // seconds = the actual time that the player seeked to
+//   })
+//   .catch(function (error) {
+//     switch (error.name) {
+//       case 'RangeError':
+//         // the time was less than 0 or greater than the video’s duration
+//         break;
 
-//         default:
-//           break;
-//       }
-//     });
-// }
+//       default:
+//         // some other error occurred
+//         break;
+//     }
+//   });
